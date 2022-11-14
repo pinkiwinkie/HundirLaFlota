@@ -1,4 +1,4 @@
-package barcos;
+package logic;
 
 public class Barcos {
     public static void colocarBarcos (char [][] tablero, int barco, int fila,

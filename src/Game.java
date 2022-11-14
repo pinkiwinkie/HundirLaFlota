@@ -1,12 +1,17 @@
 import static cambiosInternos.Cambios.*;
-import static tablero.Tablero.*;
+import static logic.Tablero.*;
 
 public class Game {
     public static void main(String[] args) {
-        char [][] tablero = crearTablero();
-        String lugar = "B5";
-        System.out.println(separarCoordenadaLetra(lugar));
-//        Jugabilidad.colocarBarcos(tablero, 3, letra, numeroCoordenada,2);
-        verTablero(tablero);
+        char [][] tableroJugador = crearTablero(),
+                tableroDisparosJugador = crearTablero(),
+                tableroPc = crearTablero(),
+                tableroDisparosPc = crearTablero();
+
+        System.out.println("TABLERO JUGADOR \t\t\t DISPAROS JUGADOR");
+        verTablero(tableroJugador, tableroDisparosJugador);
+        System.out.println("\tTABLERO PC \t\t\t\t DISPAROS PC");
+        verTablero(tableroPc, tableroDisparosPc);
+
     }
 }
