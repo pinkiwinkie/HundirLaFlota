@@ -23,7 +23,7 @@ public class Cambios {
             esCorrecta = true;
         return esCorrecta;
     }
-    public static boolean esNumeroCorrecta(char letter){
+    public static boolean esNumeroCorrecto(char letter){
         boolean esCorrecto = false;
         if (letter<65||letter>73)
             esCorrecto = true;
