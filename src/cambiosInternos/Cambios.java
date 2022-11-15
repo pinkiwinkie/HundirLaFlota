@@ -17,16 +17,14 @@ public class Cambios {
         return letraCoordenada;
     }
 
-    public static boolean esLetraCorrecta(char letter){
+    public static boolean esLetraCorrecta(int letter){
         boolean esCorrecta = false;
         if (letter<65||letter>73)
             esCorrecta = true;
         return esCorrecta;
     }
-    public static boolean esNumeroCorrecto(char letter){
-        boolean esCorrecto = false;
-        if (letter<65||letter>73)
-            esCorrecto = true;
-        return esCorrecto;
-    }
+//    public static boolean esNumeroCorrecto(int number){
+//        boolean esCorrecto = false;
+//        if (number)
+//    }
 }

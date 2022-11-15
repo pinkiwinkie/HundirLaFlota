@@ -8,9 +8,9 @@ public class Game {
                 tableroPc = crearTablero(),
                 tableroDisparosPc = crearTablero();
 
-        System.out.println("TABLERO JUGADOR \t\t\t DISPAROS JUGADOR");
+        System.out.println("JUGADOR \t\t\t DISPAROS JUGADOR");
         verTablero(tableroJugador, tableroDisparosJugador);
-        System.out.println("\tTABLERO PC \t\t\t\t DISPAROS PC");
+        System.out.println("\n\tPC \t\t\t\t\t DISPAROS PC");
         verTablero(tableroPc, tableroDisparosPc);
 
     }

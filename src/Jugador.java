@@ -1,4 +1,4 @@
-import cambiosInternos.Cambios;
+import static cambiosInternos.Cambios.*;
 import tools.Input;
 
 public class Jugador {
@@ -15,7 +15,23 @@ public class Jugador {
                 int columna, orientacion, numeroCoord, letraCoord;
                 String aux,coordenada;
                 System.out.println("Barco de " + barco + " celdas.");
-                coordenada = Input.getString("Dime coordenada donde quieres colocar: ");
+
+                boolean salirNum = false, salirLetra = false, salir = false;
+                do{
+                    do{
+                        coordenada = Input.getString("Dime coordenada donde quieres colocar: ");
+                        if (!esLetraCorrecta(separarCoordenadaLetra(coordenada))) {
+                            System.out.println("");
+                        }
+                    }while(!salir);
+
+                    numeroCoord = separarCoordenadaNumero(coordenada);
+                    letraCoord = separarCoordenadaLetra(coordenada);
+                    if (numeroCoord<0||numeroCoord>10)
+                        System.out.println("Introduce un número correcto.");
+                    else
+                        salirNum = true;
+                } while (!salirNum && !salirLetra);
 
             } while (!colocado);
         }
