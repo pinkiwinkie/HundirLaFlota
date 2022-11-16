@@ -20,40 +20,49 @@ public class Barcos {
         boolean colisiona = false;
         // lo de jugador está porque así cuando juega el pc no te muestra por pantalla los mensajitos que van para el jugador.
 
-        if (orientacionBarco == 1) {
-            for (int i = 0; i < longitudBarco; i++) {
-                if ((columna + longitudBarco) <= tablero.length) { //comprobar que no sale del tablero.
+        if (orientacionBarco == 1)
+            colisiona = colisionHorizontal(tablero, longitudBarco, fila, columna, jugador, colisiona);
+        else
+            colisiona = colisionVertical(tablero, longitudBarco, fila, columna, jugador, colisiona);
+        return colisiona;
+    }
 
-                    if (tablero[fila][columna + i] == 'B') {
-                        if (jugador)
-                            System.out.println("La casilla está ocupada");
-
-                        colisiona = true;
-                    }
-                    //comprobar que los barcos no se toquen, es decir, agua alrededor del barco.
-
-                } else {
+    public static boolean colisionVertical(char[][] tablero, int longitudBarco, int fila, int columna, boolean jugador, boolean colisionaVertical) {
+        for (int i = 0; i < longitudBarco; i++) {
+            if ((fila + longitudBarco) <= tablero[0].length) {
+                if (tablero[fila + i][columna] == 'B') {
                     if (jugador)
-                        System.out.println("El barco no cabe hacia la derecha");
-                    colisiona = true;
+                        System.out.println("La casilla está ocupada");
+                    colisionaVertical = true;
                 }
-            }
-        } else {
-            for (int i = 0; i < longitudBarco; i++) {
-                if ((fila + longitudBarco) <= tablero[0].length) {
-                    if (tablero[fila + i][columna] == 'B') {
-                        if (jugador)
-                            System.out.println("La casilla está ocupada");
-                        colisiona = true;
-                    }
-                } else {
-                    if (jugador)
-                        System.out.println("El barco no cabe hacia abajo");
-                    colisiona = true;
+            } else {
+                if (jugador)
+                    System.out.println("El barco no cabe hacia abajo");
+                colisionaVertical = true;
 
-                }
             }
         }
-        return colisiona;
+        return colisionaVertical;
+    }
+
+    public static boolean colisionHorizontal(char[][] tablero, int longitudBarco, int fila, int columna, boolean jugador, boolean colisionaHorizontal) {
+        for (int i = 0; i < longitudBarco; i++) {
+            if ((columna + longitudBarco) <= tablero.length) { //comprobar que no sale del tablero.
+                if (tablero[fila][columna + i] == 'B') {
+                    if (jugador)
+                        System.out.println("La casilla está ocupada");
+                    colisionaHorizontal = true;
+                }
+            } else {
+                if (jugador)
+                    System.out.println("El barco no cabe hacia la derecha");
+                colisionaHorizontal = true;
+            }
+        }
+        return colisionaHorizontal;
+    }
+
+    private static boolean esEspacioLibre(char[][] tablero, int longitudBarco, int fila, int columna, boolean jugador){
+        return true;
     }
 }

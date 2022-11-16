@@ -27,11 +27,11 @@ public class Jugador {
 
         do {
             coordenada = Input.getString("Dime coordenada donde quieres colocar: ");
-            primeraPosicion = coordenada.charAt(0);
-            segundaPosicion = coordenada.charAt(1);
             if (coordenada.length()>2)
-                System.err.println("Solo pueden haber 2 caracteres");
+                System.err.println("Solo pueden haber 2 caracteres.");
             else{
+                primeraPosicion = coordenada.charAt(0);
+                segundaPosicion = coordenada.charAt(1);
                 if (!esLetraCorrecta(separarCoordenadaLetra(coordenada)))
                     System.err.println("Introduce una letra valida.");
                 else
@@ -53,8 +53,8 @@ public class Jugador {
         boolean salir = false;
         do {
             orientacion=Input.getInt("En qué orientación quiere el barco? (1: horizontal, 2: vertical) ");
-            if (orientacion!=1&&orientacion!=2)
-                System.out.println("Introduce 1 o 2");
+            if (!esOrientacionCorrecta(orientacion))
+                System.out.println("Introduce 1 o 2.");
             else
                 salir=true;
         }while (!salir);
