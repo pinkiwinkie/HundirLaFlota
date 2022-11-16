@@ -13,6 +13,7 @@ public class Prueba {
         if (!hayColision)
             colocarEnElTablero(tableroJugador,5,5,3,2);
         verTablero(tableroJugador,tableroDisparosJugador);
+        Jugador.pedirCoordenadas();
     }
 }
 

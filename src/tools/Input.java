@@ -16,7 +16,7 @@ public class Input {
     public static String getString(String message) {
         Scanner sc = new Scanner(System.in);
         System.out.print(message);
-        return sc.next();
+        return sc.next().toUpperCase();
     }
 
     public static char getChar(String message) {
