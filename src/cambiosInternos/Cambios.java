@@ -3,9 +3,8 @@ package cambiosInternos;
 public class Cambios {
     public static int separarCoordenadaNumero(String coordenada) {
         char numero = coordenada.charAt(1);
-        int aux = Character.getNumericValue(numero), numeroCoordenada = 0;
-        if (aux > 0 && aux < 10)
-            numeroCoordenada = aux;
+        int numeroCoordenada;
+        numeroCoordenada = Character.getNumericValue(numero);
         return numeroCoordenada;
     }
 
