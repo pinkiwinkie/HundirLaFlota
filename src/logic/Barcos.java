@@ -17,27 +17,33 @@ public class Barcos {
     }
 
     public static boolean hayColision(char[][] tablero, int longitudBarco, int fila, int columna, int orientacionBarco, boolean jugador) {
-        boolean colisiona = false;
-        // lo de jugador está porque así cuando juega el pc no te muestra por pantalla los mensajitos que van para el jugador.
+        boolean colisiona;
+        // he creado boolean jugador para mostrar los mensajes de error solo en la ronda del jugador.
 
         if (orientacionBarco == 1)
-            colisiona = colisionHorizontal(tablero, longitudBarco, fila, columna, jugador, colisiona);
+            colisiona = colisionHorizontal(tablero, longitudBarco, fila, columna, jugador);
         else
-            colisiona = colisionVertical(tablero, longitudBarco, fila, columna, jugador, colisiona);
+            colisiona = colisionVertical(tablero, longitudBarco, fila, columna, jugador);
         return colisiona;
     }
 
-    public static boolean colisionVertical(char[][] tablero, int longitudBarco, int fila, int columna, boolean jugador, boolean colisionaVertical) {
+    public static boolean colisionVertical(char[][] tablero, int longitudBarco, int fila, int columna, boolean jugador) {
+        boolean colisionaVertical = false;
         for (int i = 0; i < longitudBarco; i++) {
             if ((fila + longitudBarco) <= tablero[0].length) {
                 if (tablero[fila + i][columna] == 'B') {
                     if (jugador)
-                        System.out.println("La casilla está ocupada");
+                        System.out.println("La casilla está ocupada.");
+                    colisionaVertical = true;
+                }
+                if ((tablero[--fila + i][columna] == 'B')&&(tablero[2+fila + i][columna] == 'B')) {
+                    if (jugador)
+                        System.out.println("No puedes poner un barco pegado de otro.");
                     colisionaVertical = true;
                 }
             } else {
                 if (jugador)
-                    System.out.println("El barco no cabe hacia abajo");
+                    System.out.println("El barco no cabe hacia abajo.");
                 colisionaVertical = true;
 
             }
@@ -45,24 +51,31 @@ public class Barcos {
         return colisionaVertical;
     }
 
-    public static boolean colisionHorizontal(char[][] tablero, int longitudBarco, int fila, int columna, boolean jugador, boolean colisionaHorizontal) {
+    public static boolean colisionHorizontal(char[][] tablero, int longitudBarco, int fila, int columna, boolean jugador) {
+        boolean colisionaHorizontal = false;
         for (int i = 0; i < longitudBarco; i++) {
             if ((columna + longitudBarco) <= tablero.length) { //comprobar que no sale del tablero.
                 if (tablero[fila][columna + i] == 'B') {
                     if (jugador)
-                        System.out.println("La casilla está ocupada");
+                        System.out.println("La casilla está ocupada.");
+                    colisionaHorizontal = true;
+                }
+                if ((tablero[fila][(--columna) + i] == 'B')||(tablero[fila][(2+columna) + i] == 'B')) {
+                    if (jugador)
+                        System.out.println("No puedes poner un barco pegado de otro.");
+                    colisionaHorizontal = true;
+                }
+                if ((tablero[fila][(--columna) + (i+1)] == 'B')||(tablero[fila][(2+columna) + (i+1)] == 'B')) {
+                    if (jugador)
+                        System.out.println("No puedes poner un barco pegado de otro.");
                     colisionaHorizontal = true;
                 }
             } else {
                 if (jugador)
-                    System.out.println("El barco no cabe hacia la derecha");
+                    System.out.println("El barco no cabe hacia la derecha.");
                 colisionaHorizontal = true;
             }
         }
         return colisionaHorizontal;
-    }
-
-    private static boolean esEspacioLibre(char[][] tablero, int longitudBarco, int fila, int columna, boolean jugador){
-        return true;
     }
 }

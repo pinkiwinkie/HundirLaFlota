@@ -31,7 +31,7 @@ public class Cambios {
 
     public static boolean esOrientacionCorrecta(int number) {
         boolean esCorrecto = false;
-        if (number == 1 || number ==2)
+        if (number == 1 || number == 2)
             esCorrecto = true;
         return esCorrecto;
     }

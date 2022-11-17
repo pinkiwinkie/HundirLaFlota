@@ -74,5 +74,4 @@ public class Jugador {
         } while (!salir);
         return orientacion;
     }
-
 }
