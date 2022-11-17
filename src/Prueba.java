@@ -24,7 +24,63 @@ public class Prueba {
 }
 
 
-
+/*
+* //HORIZONTAL
+* if (fila == 1 && columna == 1) {
+            if (tablero[fila][1 + columna + i] == 'B') {
+                if (jugador)
+                    System.out.println("No puedes poner un barco pegado de otro.");
+                return false;
+            }
+        } else if (fila == 9 && columna == 1) {
+            if (tablero[fila][1 + columna + i] == 'B') {
+                if (jugador)
+                    System.out.println("No puedes poner un barco pegado de otro.");
+                return false;
+            }
+        } else if (fila == 1 && columna == 9) {
+            if (tablero[1 + fila][columna] == 'B') {
+                if (jugador)
+                    System.out.println("No puedes poner un barco pegado de otro.");
+                return false;
+            }
+        } else {
+            if ((tablero[fila][--columna + i] == 'B') || (tablero[fila][2 + columna + i] == 'B')) {
+                if (jugador)
+                    System.out.println("No puedes poner un barco pegado de otro.");
+                return false;
+            }
+        }
+*
+*
+* //VERTICAL
+*  if (fila == 1 && columna == 1) {
+            if (tablero[1 + fila + i][columna] == 'B') {
+                if (jugador)
+                    System.out.println("No puedes poner un barco pegado de otro.");
+                return false;
+            }
+        } else if (fila == 9 && columna == 1) {
+            if (tablero[--fila + i][columna] == 'B') {
+                if (jugador)
+                    System.out.println("No puedes poner un barco pegado de otro.");
+                return false;
+            }
+        } else if (fila == 1 && columna == 9) {
+            if (tablero[1 + fila + i][columna] == 'B') {
+                if (jugador)
+                    System.out.println("No puedes poner un barco pegado de otro.");
+                return false;
+            }
+        } else {
+            if ((tablero[--fila + i][columna] == 'B') || (tablero[2 + fila + i][columna] == 'B')) {
+                if (jugador)
+                    System.out.println("No puedes poner un barco pegado de otro.");
+                return false;
+            }
+        }
+*
+* */
 
 
 
