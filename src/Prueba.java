@@ -6,13 +6,12 @@ public class Prueba {
     public static void main(String[] args) {
         char [][] tableroJugador = crearTablero(),
                 tableroDisparosJugador = crearTablero();
+        int [] barcos = {4,3,2,1,1};
         System.out.println("TABLERO JUGADOR \t\t\t DISPAROS JUGADOR");
         verTablero(tableroJugador, tableroDisparosJugador);
-        boolean hayColision = hayColision(tableroJugador,5,5,3,2,true);
-        if (!hayColision)
-            colocarEnElTablero(tableroJugador,5,5,3,2);
-        System.out.println("TABLERO JUGADOR \t\t\t DISPAROS JUGADOR");
-        verTablero(tableroJugador,tableroDisparosJugador);
+        Jugador.colocarBarcos(tableroJugador, tableroDisparosJugador, barcos);
+//        System.out.println("TABLERO JUGADOR \t\t\t DISPAROS JUGADOR");
+//        verTablero(tableroJugador,tableroDisparosJugador);
 //        Jugador.pedirCoordenadas();
 //        System.out.println(Jugador.pedirOrientacion());
 //        boolean hayColision2 = hayColision(tableroJugador, 4,8,4,1,true);
