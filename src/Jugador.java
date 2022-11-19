@@ -5,7 +5,7 @@ import logic.Tablero;
 import tools.Input;
 
 public class Jugador {
-    public static void colocarBarcos(char[][] tableroJugador,char[][] disparosJugador, int[] barcos) {
+    public static void colocarBarcos(char[][] tableroJugador, char[][] disparosJugador, int[] barcos) {
         int barco, i = 0;
         boolean colocado = false;
         System.out.println("Vamos a proceder a colocar los barcos.");
@@ -24,10 +24,9 @@ public class Jugador {
                     colocado = true;
                     i++;
                 }
-                Tablero.verTablero(tableroJugador,disparosJugador);
+                Tablero.verTablero(tableroJugador, disparosJugador);
             } while (!colocado);
         } while (i != barcos.length - 1);
-
     }
 
     public static String pedirCoordenadas() {
