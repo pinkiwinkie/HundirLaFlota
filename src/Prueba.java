@@ -1,6 +1,6 @@
 import static logic.Barcos.*;
 import static logic.Tablero.crearTablero;
-import static logic.Tablero.verTablero;
+import static logic.Tablero.*;
 
 public class Prueba {
     public static void main(String[] args) {
@@ -8,8 +8,10 @@ public class Prueba {
                 tableroDisparosJugador = crearTablero();
         int [] barcos = {4,3,2,1,1};
         System.out.println("TABLERO JUGADOR \t\t\t DISPAROS JUGADOR");
-        verTablero(tableroJugador, tableroDisparosJugador);
+        verTableroJugador(tableroJugador, tableroDisparosJugador);
         Jugador.colocarBarcos(tableroJugador, tableroDisparosJugador, barcos);
+
+
 //        System.out.println("TABLERO JUGADOR \t\t\t DISPAROS JUGADOR");
 //        verTablero(tableroJugador,tableroDisparosJugador);
 //        Jugador.pedirCoordenadas();
@@ -22,3 +24,67 @@ public class Prueba {
 //        System.out.println(colisionVertical(tableroJugador,5,2,3,true,false));
     }
 }
+
+
+
+
+
+
+
+
+
+/*
+* public static boolean disparosJugador (char [][] disparosJugador, char [][] tableroPC, char [][] tableroJugador){
+        Scanner sc = new Scanner(System.in);
+        boolean resultado = false; // para que vaya descontando vidas.
+        boolean disparos = false; //saber si has disparado.
+        boolean salir = false; // solo se usa para salir del bucle si está correcto.
+        do {
+            char fila;
+            int columna;
+            String aux;
+            System.out.println("Vamos a proceder a disparar");
+            do {
+                salir = false;
+                System.out.println("Dime la fila (A-J) donde quieres disparar");
+                fila = sc.nextLine().toUpperCase().charAt(0);
+                if (fila < 'A' || fila > 'J'){
+                    System.out.println("Introduce la letra de la A a la J");
+                } else salir = true;
+            }while (!salir);
+
+            do {
+                salir = false;
+                System.out.println("Dime la columna (0-9) donde quieres disparar");
+                aux = sc.nextLine();
+                if (aux.compareTo("0") < 0 || aux.compareTo("9")>0 ) {
+                    System.out.println("El valor introducido no es válido");
+                } else salir = true;
+            } while (!salir);
+            columna = Integer.parseInt(aux);
+            int posFila = fila - 'A' + 1; // esto es para que no cuente la columna de letras ni la fila de números.
+            do {
+                if (disparosJugador[posFila][columna + 1] == 'T' || disparosJugador[posFila][columna + 1] == 'X') {
+                    System.out.println("Ya has disparado en esta coordenada");
+                    salir = true;
+                } else {
+                    if (tableroPC[posFila][columna + 1] == 'B') {
+                        tableroPC[posFila][columna + 1] = 'T';
+                        disparosJugador[posFila][columna + 1] = 'T';
+                        disparos = true;
+                        resultado = true;
+                        salir= false;
+                    } else {
+                        disparosJugador[posFila][columna + 1] = 'X';
+                        tableroPC[posFila][columna + 1] = 'X';
+                        disparos = true;
+                    }
+                }
+            } while (!salir);
+        } while (!disparos);
+        System.out.println("Tablero jugador \t\t Tablero disparos jugador");
+        VerTablero(tableroJugador, disparosJugador);
+        return resultado;
+    }
+*
+* */

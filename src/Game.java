@@ -7,12 +7,19 @@ public class Game {
                 tableroDisparosJugador = crearTablero(),
                 tableroPc = crearTablero(),
                 tableroDisparosPc = crearTablero();
-        int[]barcos={5,4,3,2,2,1,1};
-        verTablero(tableroJugador, tableroDisparosJugador);
-        verTablero(tableroPc, tableroDisparosPc);
+        int[]barcos={1,1,1,1,1,1};
+        int vidasPc=2, vidasJugador = 2;
+        verTableroJugador(tableroJugador, tableroDisparosJugador);
+        verTableroPc(tableroPc, tableroDisparosPc);
         Jugador.colocarBarcos(tableroJugador, tableroDisparosJugador, barcos);
-//        Pc.colocarBarcos(tableroPc,barcos);
-        verTablero(tableroPc,tableroDisparosPc);
+        Pc.colocarBarcos(tableroPc,barcos);
+        verTableroPc(tableroPc,tableroDisparosPc);
+        do {
+            boolean prueba = Jugador.disparos(tableroDisparosJugador,tableroPc,tableroJugador);
+            if (prueba)
+                vidasPc--;
+        }while (vidasPc>0);
+
     }
 
     public static void menu(){

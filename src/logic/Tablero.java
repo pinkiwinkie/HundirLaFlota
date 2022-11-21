@@ -1,15 +1,33 @@
 package logic;
 
 public class Tablero {
-    public static void verTablero(char[][] tablero, char[][] tableroDisparos) {
-        System.out.println("TABLERO BARCOS\t\t\t\t TABLERO DISPAROS");
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
+    public static void verTableroJugador(char[][] tablero, char[][] tableroDisparos) {
+        System.out.println(ANSI_GREEN+"TABLERO BARCOS\t\t\t\t TABLERO DISPAROS"+ ANSI_RESET);
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[0].length; j++) {
                 System.out.print(tablero[i][j] + " ");
             }
             System.out.print("\t\t");
-            for (int j = 0; j < tablero[0].length; j++) {
-                System.out.print(tablero[i][j] + " ");
+            for (int j = 0; j < tableroDisparos[0].length; j++) {
+                System.out.print(tableroDisparos[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void verTableroPc(char[][] tableroPc, char[][] tableroDisparosPc) {
+        System.out.println(ANSI_PURPLE+"TABLERO BARCOS\t\t\t\t TABLERO DISPAROS"+ ANSI_RESET);
+        for (int i = 0; i < tableroPc.length; i++) {
+            for (int j = 0; j < tableroPc[0].length; j++) {
+                System.out.print(tableroPc[i][j] + " ");
+            }
+            System.out.print("\t\t");
+            for (int j = 0; j < tableroDisparosPc[0].length; j++) {
+                System.out.print(tableroDisparosPc[i][j] + " ");
             }
             System.out.println();
         }
