@@ -33,6 +33,16 @@ public class Prueba {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /*
 * public static boolean disparosJugador (char [][] disparosJugador, char [][] tableroPC, char [][] tableroJugador){
         Scanner sc = new Scanner(System.in);
