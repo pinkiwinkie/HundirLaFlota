@@ -6,12 +6,12 @@ import tools.Input;
 
 public class Jugador {
     public static void colocarBarcos(char[][] tableroJugador, char[][] disparosJugador, int[] barcos) {
-        int barco, i = 0;
+        int barco;
         boolean colocado = false;
         System.out.println("Vamos a proceder a colocar los barcos.");
-        do {
+        for (int j = 0; j < barcos.length; j++) {
             do {
-                barco = barcos[i];
+                barco = barcos[j];
                 int orientacion, numeroCoordColumna, letraCoordFila;
                 String coordenada;
                 System.out.println("Barco de " + barco + " celdas.");
@@ -25,11 +25,12 @@ public class Jugador {
                 if (!hayColision(tableroJugador, barco, letraCoordFila, numeroCoordColumna, orientacion, true)) {
                     colocarEnElTablero(tableroJugador, barco, letraCoordFila, numeroCoordColumna, orientacion);
                     colocado = true;
-                    i++;
+                    j++;
                 }
                 verTableroJugador(tableroJugador, disparosJugador);
             } while (!colocado);
-        } while (i != barcos.length - 1);
+        }
+
     }
 
     private static String pedirCoordenadas() {

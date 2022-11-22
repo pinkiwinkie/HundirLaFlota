@@ -28,13 +28,36 @@ public class Barcos {
     }
 
     public static boolean hayColision(char[][] tablero, int longitudBarco, int fila, int columna, int orientacionBarco, boolean jugador) {
-        boolean colisiona;
+        boolean colisiona=false;
         // he creado boolean jugador para mostrar los mensajes de error solo en la ronda del jugador.
+        int i=1;
+        do {
+            if (orientacionBarco==1){
+                if (tablero[fila][columna]=='~') {
+                    if (alrededorVerticalVacio(tablero,fila,columna,jugador,i)) {
 
-        if (orientacionBarco == 1)
-            colisiona = colisionHorizontal(tablero, longitudBarco, fila, columna, jugador);
-        else
-            colisiona = colisionVertical(tablero, longitudBarco, fila, columna, jugador);
+                    } else {
+                        colisiona = true;
+                    }
+
+                }else {
+                    colisiona=true;
+                }
+            }else {
+                if (tablero[fila][columna]=='~') {
+                    if (alrededorHorizontalVacio(tablero,fila,columna,jugador,i)) {
+
+                    } else {
+                        colisiona = true;
+                    }
+
+                }else {
+                    colisiona=true;
+                }
+            }
+            i++;
+        }while (colisiona==false&&longitudBarco>=i);
+
         return colisiona;
     }
 
@@ -46,10 +69,10 @@ public class Barcos {
                         System.out.println("La casilla está ocupada.");
                     return true;
                 }
-                if (!alrededorVerticalVacio(tablero, fila, columna, jugador, 0))
+              /*  if (!alrededorVerticalVacio(tablero, fila, columna, jugador, 0))
                     return true;
                 if (!alrededorHorizontalVacio(tablero, fila, columna, jugador, 0))
-                    return true;
+                    return true;*/
             } else {
                 if (jugador)
                     System.out.println("El barco no cabe hacia abajo.");
@@ -63,10 +86,10 @@ public class Barcos {
                             System.out.println("La casilla está ocupada.");
                         return true;
                     }
-                    if (!alrededorVerticalVacio(tablero, fila, columna, jugador, i))
+                   /* if (!alrededorVerticalVacio(tablero, fila, columna, jugador, i))
                         return true;
                     if (!alrededorHorizontalVacio(tablero, fila, columna, jugador, i))
-                        return true;
+                        return true;*/
                 } else {
                     if (jugador)
                         System.out.println("El barco no cabe hacia abajo.");
@@ -84,10 +107,10 @@ public class Barcos {
                     System.out.println("La casilla esta ocupada.");
                 return true;
             }
-            if (!alrededorHorizontalVacio(tablero, fila, columna, jugador, 0))
+           /* if (!alrededorHorizontalVacio(tablero, fila, columna, jugador, 0))
                 return true;
             if (!alrededorVerticalVacio(tablero, fila, columna, jugador, 0))
-                return true;
+                return true;*/
         } else {
             for (int i = 0; i < longitudBarco; i++) {
                 if ((columna + longitudBarco) <= tablero.length) { //comprobar que no sale del tablero.
@@ -123,9 +146,12 @@ public class Barcos {
         } else if (fila == 9) {
             if (!esFilaAnteriorLibre(tablero, fila, columna, jugador, i))
                 return false;
+        } else if (fila==1) {
+            if (!esFilaSiguienteLibre(tablero, fila, columna, jugador, i))
+                return false;
         } else {
             //busca coincidencias en el interior del mapa.
-            if (!esFilaAnteriorLibreOFilaSiguienteLibre(tablero, fila, columna, jugador, i))
+            if (!esColumnaAnteriorLibreOColumnaSiguienteLibre(tablero, fila, columna, jugador, i))
                 return false;
         }
         return true;
@@ -150,20 +176,12 @@ public class Barcos {
                 return false;
             //busca coincidencias en el interior del mapa.
         } else {
-            if (!esColumnaAnteriorLibreOColumnaSiguienteLibre(tablero, fila, columna, jugador, i))
+            if (!esFilaAnteriorLibreOFilaSiguienteLibre(tablero, fila, columna, jugador, i))
                 return false;
         }
         return true;
     }
 
-    private static boolean esColumnaAnteriorLibreOColumnaSiguienteLibre(char[][] tablero, int fila, int columna, boolean jugador, int i) {
-        if ((tablero[fila + i][columna - 1] == 'B') || (tablero[fila + i][columna + 1] == 'B')) {
-            if (jugador)
-                System.out.println("No puedes poner un barco pegado de otro.");
-            return false;
-        }
-        return true;
-    }
 
     private static boolean esColumnaSiguienteLibre(char[][] tablero, int fila, int columna, boolean jugador, int i) {
         if (tablero[fila][columna + 1] == 'B') {
@@ -182,23 +200,12 @@ public class Barcos {
         }
         return true;
     }
-// esta cambiado los nombres de los metodos del else y a la hora de llamarlo tambien está al revés.
-    private static boolean esFilaAnteriorLibreOFilaSiguienteLibre(char[][] tablero, int fila, int columna, boolean jugador, int i) {
-        if ((tablero[fila - 1][columna + i] == 'B') || (tablero[fila + 1][columna + i] == 'B')) {
-            if (jugador)
-                System.out.println("No puedes poner un barco pegado de otro.");
-            return false;
-
-        }
-        return true;
-    }
 
     private static boolean esFilaAnteriorLibre(char[][] tablero, int fila, int columna, boolean jugador, int i) {
         if (tablero[fila - 1][columna] == 'B') {
             if (jugador)
                 System.out.println("No puedes poner un barco pegado de otro.");
             return false;
-
         }
         return true;
     }
@@ -211,4 +218,26 @@ public class Barcos {
         }
         return true;
     }
+
+    //ESTOS 2 METODOS SE USAN PARA CUANDO ESTAS DENTRO DEL TABLERO QUE NO SEA LADO.
+    private static boolean esFilaAnteriorLibreOFilaSiguienteLibre(char[][] tablero, int fila, int columna, boolean jugador, int i) {
+
+            if ((tablero[fila-1][columna+i] == 'B') || (tablero[fila + 1][columna+i] == 'B')) {
+                if (jugador)
+                    System.out.println("No puedes poner un barco pegado de otro.");
+                return false;
+            }
+        return true;
+    }
+
+    private static boolean esColumnaAnteriorLibreOColumnaSiguienteLibre(char[][] tablero, int fila, int columna, boolean jugador, int i) {
+        if ((tablero[fila][columna - 1] == 'B') || (tablero[fila][columna + 1] == 'B')) {
+            if (jugador)
+                System.out.println("No puedes poner un barco pegado de otro.");
+            return false;
+        }
+        return true;
+    }
+
+
 }
