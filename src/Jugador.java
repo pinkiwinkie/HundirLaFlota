@@ -6,15 +6,15 @@ import tools.Input;
 
 public class Jugador {
     public static void colocarBarcos(char[][] tableroJugador, char[][] disparosJugador, int[] barcos) {
-        int barco, i = 0;
+        int barco, i=0;
         boolean colocado = false;
-        System.out.println("Vamos a proceder a colocar los barcos.");
+        System.out.println("We are going to fit the ships");
         do {
             do {
                 barco = barcos[i];
                 int orientacion, numeroCoordColumna, letraCoordFila;
                 String coordenada;
-                System.out.println("Barco de " + barco + " celdas.");
+                System.out.println("Boat of " + barco + " cells.");
                 coordenada = pedirCoordenadas();
                 letraCoordFila = separarCoordenadaLetra(coordenada);
                 numeroCoordColumna = separarCoordenadaNumero(coordenada);
@@ -29,7 +29,7 @@ public class Jugador {
                 }
                 verTableroJugador(tableroJugador, disparosJugador);
             } while (!colocado);
-        } while (i != barcos.length - 1);
+        } while (i != barcos.length);
     }
 
     private static String pedirCoordenadas() {
@@ -41,22 +41,22 @@ public class Jugador {
             salirNum = false;
             salirLetra = false;
             salirFormato = false;
-            coordenada = Input.getString("Dime coordenada : ");
+            coordenada = Input.getString("Type coordinate: ");
             if (coordenada.length() != 2)
-                System.err.println("Solo pueden haber 2 caracteres.");
+                System.err.println("Only two character.");
             else {
                 primeraPosicion = coordenada.charAt(0);
                 segundaPosicion = coordenada.charAt(1);
                 if (!esLetraCorrecta(separarCoordenadaLetra(coordenada)))
-                    System.err.println("Introduce una letra valida.");
+                    System.err.println("Introduce a valid letter.");
                 else
                     salirLetra = true;
                 if (!esNumeroCorrecto(separarCoordenadaNumero(coordenada)))
-                    System.err.println("Introduce un numero valido.");
+                    System.err.println("Introduce a valid number.");
                 else
                     salirNum = true;
                 if ((primeraPosicion > 48 && primeraPosicion < 58) || (segundaPosicion > 64 && segundaPosicion < 74))
-                    System.err.println("El formato introducido no es correcto.");
+                    System.err.println("The format is incorrect.");
                 else
                     salirFormato = true;
             }
@@ -70,43 +70,51 @@ public class Jugador {
         do {
             orientacion = Input.getInt("En que orientacion quiere el barco? (1: horizontal, 2: vertical) ");
             if (!esOrientacionCorrecta(orientacion))
-                System.out.println("Introduce 1 o 2.");
+                System.err.println("Introduce 1 or 2.");
             else
                 salir = true;
         } while (!salir);
         return orientacion;
     }
 
-    public static boolean disparos(char[][] disparosJugador, char[][] tableroPC, char[][] tableroJugador) {
-        boolean hayDisparo = false, quedarse;
+    public static boolean disparos(char[][] disparosJugador, char[][] tableroPC, char[][] tableroJugador, char[][] disparosPC) {
+        boolean hayDisparo = false, salir, descuentaVidaPc = false;
         String coordenada;
-        System.out.println("Vamos a proceder a disparar");
-
-        int numeroCoordColumna, letraCoordFila;
-        coordenada = pedirCoordenadas();
-        letraCoordFila = separarCoordenadaLetra(coordenada);
-        numeroCoordColumna = separarCoordenadaNumero(coordenada);
-        //T: tocado, X: disparo fallido.
-        quedarse = false;
+        System.out.println("Let's shoot.");
         do {
-            if (disparosJugador[letraCoordFila][numeroCoordColumna] == 'T' || disparosJugador[letraCoordFila][numeroCoordColumna] == 'X') {
-                System.out.println("Ya has disparado en esta coordenada");
-                quedarse = true;
-            } else {
-                if (tableroPC[letraCoordFila][numeroCoordColumna] == 'B') {
-                    tableroPC[letraCoordFila][numeroCoordColumna] = 'T';
-                    disparosJugador[letraCoordFila][numeroCoordColumna] = 'T';
-                    hayDisparo = true;
-                    quedarse = false;
+            int numeroCoordColumna, letraCoordFila;
+            coordenada = pedirCoordenadas();
+            letraCoordFila = separarCoordenadaLetra(coordenada);
+            numeroCoordColumna = separarCoordenadaNumero(coordenada);
+            //T: tocado, X: disparo fallido.
+            salir = false;
+            do {
+                if (disparosJugador[letraCoordFila][numeroCoordColumna] == 'T' || disparosJugador[letraCoordFila][numeroCoordColumna] == 'X') {
+                    System.err.println("You have already shoot at this coordinate.");
+                    salir = true;
                 } else {
-                    disparosJugador[letraCoordFila][numeroCoordColumna] = 'X';
-                    tableroPC[letraCoordFila][numeroCoordColumna] = 'X';
-                    hayDisparo = true;
+                    if (tableroPC[letraCoordFila][numeroCoordColumna] == 'B') {
+                        tableroPC[letraCoordFila][numeroCoordColumna] = 'T';
+                        disparosJugador[letraCoordFila][numeroCoordColumna] = 'T';
+                        descuentaVidaPc = true;
+                        if ((alrededorHorizontalVacio(tableroPC,letraCoordFila,numeroCoordColumna,false,0))&&
+                                (alrededorVerticalVacio(tableroPC,letraCoordFila,numeroCoordColumna,false,0)))
+                            System.out.println("Barco tocado y hundido");
+                        else
+                            System.out.println("Barco tocado.");
+                        hayDisparo = true;
+                    } else {
+                        disparosJugador[letraCoordFila][numeroCoordColumna] = 'X';
+                        tableroPC[letraCoordFila][numeroCoordColumna] = 'X';
+                        hayDisparo = true;
+                    }
                 }
-            }
-        } while (!quedarse);
-        verTableroJugador(tableroJugador, tableroPC);
-        return hayDisparo;
+            } while (!salir);
+        } while (!hayDisparo);
+
+        verTableroJugador(tableroJugador, disparosJugador);
+        verTableroPc(tableroPC, disparosPC);
+        return descuentaVidaPc;
     }
 
 }

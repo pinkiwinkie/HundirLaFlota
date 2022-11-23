@@ -6,7 +6,7 @@ public class Tablero {
     public static final String ANSI_RESET = "\u001B[0m";
 
     public static void verTableroJugador(char[][] tablero, char[][] tableroDisparos) {
-        System.out.println(ANSI_GREEN+"TABLERO BARCOS\t\t\t\t TABLERO DISPAROS"+ ANSI_RESET);
+        System.out.println(ANSI_GREEN+"BOARD SHIPS\t\t\t\t BOARD SHOOTS"+ ANSI_RESET);
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[0].length; j++) {
                 System.out.print(tablero[i][j] + " ");
@@ -20,7 +20,7 @@ public class Tablero {
     }
 
     public static void verTableroPc(char[][] tableroPc, char[][] tableroDisparosPc) {
-        System.out.println(ANSI_PURPLE+"TABLERO BARCOS\t\t\t\t TABLERO DISPAROS"+ ANSI_RESET);
+        System.out.println(ANSI_PURPLE+"BOARD SHIPS\t\t\t\t BOARD SHOOTS"+ ANSI_RESET);
         for (int i = 0; i < tableroPc.length; i++) {
             for (int j = 0; j < tableroPc[0].length; j++) {
                 System.out.print(tableroPc[i][j] + " ");
@@ -48,5 +48,13 @@ public class Tablero {
             }
         }
         return tablero;
+    }
+
+    public static int contarCeldas (int [] barcos){
+        int contador = 0; // este método lo uso para saber cuántas casillas ocupadas por barcos hay.
+        for (int barco : barcos) { //con este método podemos saber las vidas de ambos jugadores.
+            contador += barco;
+        }
+        return contador;
     }
 }

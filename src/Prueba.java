@@ -116,3 +116,50 @@ public class Prueba {
     }
 *
 * */
+
+
+
+
+
+
+
+// do {
+//         if (disparosJugador[letraCoordFila][numeroCoordColumna] == 'T' || disparosJugador[letraCoordFila][numeroCoordColumna] == 'X') {
+//         System.out.println("Ya has disparado en esta coordenada");
+//         quedarse = true;
+//         } else {
+//         if (tableroPC[letraCoordFila][numeroCoordColumna] == 'B') {
+//         tableroPC[letraCoordFila][numeroCoordColumna] = 'T';
+//         disparosJugador[letraCoordFila][numeroCoordColumna] = 'T';
+//         hayDisparo = true;
+//         quedarse = false;
+//         } else {
+//         disparosJugador[letraCoordFila][numeroCoordColumna] = 'X';
+//         tableroPC[letraCoordFila][numeroCoordColumna] = 'X';
+//         hayDisparo = true;
+//         }
+//         }
+//         } while (!quedarse);
+//         verTableroJugador(tableroJugador, tableroPC);
+//         return hayDisparo;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
