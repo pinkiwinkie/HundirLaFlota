@@ -14,12 +14,12 @@ public class Game {
         Jugador.colocarBarcos(tableroJugador, tableroDisparosJugador, barcos);
         Pc.colocarBarcos(tableroPc,barcos);
         verTableroPc(tableroPc,tableroDisparosPc);
-      /*  do {
+        do {
             boolean prueba = Jugador.disparos(tableroDisparosJugador,tableroPc,tableroJugador);
             if (prueba)
                 vidasPc--;
         }while (vidasPc>0);
-*/
+
     }
 
     public static void menu(){

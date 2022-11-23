@@ -29,16 +29,34 @@ public class Prueba {
 
 
 
-
-
-
-
-
-
-
-
-
-
+//    boolean colisiona = false;
+//    // he creado boolean jugador para mostrar los mensajes de error solo en la ronda del jugador.
+//    int i = 0;
+//        do {
+//                i++;
+//                if (orientacionBarco == 1) {
+//                if (tablero[fila][columna] == '~') {
+//                if (alrededorVerticalVacio(tablero, fila, columna, jugador, i)) {
+//                if (alrededorHorizontalVacio(tablero, fila, columna, jugador, i))
+//                return false;
+//                } else
+//                return true;
+//                } else
+//                return true;
+//                } else {
+//                if (tablero[fila][columna] == '~') {
+//                if (alrededorHorizontalVacio(tablero, fila, columna, jugador, i)){
+//                if(alrededorVerticalVacio(tablero, fila, columna, jugador, i))
+//                return false;
+//                } else {
+//                return true;
+//                }
+//                } else {
+//                return true;
+//                }
+//                }
+//                } while (longitudBarco >= i);
+//                return false;
 
 
 
