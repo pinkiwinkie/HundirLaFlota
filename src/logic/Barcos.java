@@ -7,11 +7,9 @@ public class Barcos {
             if (barco != 1) {
                 for (int i = 0; i < barco; i++) {
                     if ((columna + barco) <= tablero.length)
-
                         tablero[fila][columna + i] = 'B';
                 }
             } else {
-
                 if ((columna + barco) <= tablero.length)
                     tablero[fila][columna] = 'B';
             }
@@ -212,6 +210,15 @@ public class Barcos {
         return true;
     }
 
+    /**
+     *
+     * @param tablero
+     * @param fila
+     * @param columna
+     * @param jugador
+     * @param i
+     * @return
+     */
     private static boolean esFilaAnteriorLibre(char[][] tablero, int fila, int columna, boolean jugador, int i) {
         if (columna + i < 10) {
             if (tablero[fila - 1][columna + i] == 'B') {

@@ -70,4 +70,33 @@ public class Pc {
     private static int getNumberRandom(int x) {
         return (int) (Math.random() * x + 1);
     }
+
+    public static boolean disparosConIa(char[][] disparosPC, char[][] tableroJugador, char[][] disparosJugador, char[][] tableroPC) {
+        boolean hayDisparo = false, salir, descuentaVidaJugador = false;
+        do {
+            int columna = getNumberRandom(9);
+            int fila = getNumberRandom(9);
+//            System.out.println("columna " + columna + "fila " + fila);
+            salir = false;
+            do {
+                if (disparosPC[fila][columna] == 'T' || disparosPC[fila][columna] == 'X') {
+                    salir=true;
+                } else {
+                    if (tableroJugador[fila][columna] == 'B') {
+                        tableroJugador[fila][columna] = 'T';
+                        disparosPC[fila][columna] = 'T';
+                        descuentaVidaJugador = true;
+
+                    } else {
+                        disparosPC[fila][columna] = 'X';
+                        tableroJugador[fila][columna] = 'X';
+                    }
+                    hayDisparo = true;
+                }
+            } while (!salir);
+        } while (!hayDisparo);
+        verTableroJugador(tableroJugador, disparosJugador);
+        verTableroPc(tableroPC, disparosPC);
+        return descuentaVidaJugador;
+    }
 }
