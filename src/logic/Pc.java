@@ -1,9 +1,7 @@
-import logic.Tablero;
+package logic;
 
-import static logic.Barcos.colocarEnElTablero;
-import static logic.Barcos.hayColision;
-import static logic.Tablero.verTableroJugador;
-import static logic.Tablero.verTableroPc;
+import static logic.Barcos.*;
+import static logic.Tablero.*;
 
 public class Pc {
     public static void colocarBarcos(char[][] tableroPC, int[] barcos, char[][] tableroDisparosPC) {

@@ -1,3 +1,5 @@
+package logic;
+
 import static cambiosInternos.Cambios.*;
 import static logic.Barcos.*;
 import static logic.Tablero.*;

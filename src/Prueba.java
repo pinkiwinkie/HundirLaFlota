@@ -1,4 +1,5 @@
-import static logic.Barcos.*;
+import logic.Jugador;
+
 import static logic.Tablero.crearTablero;
 import static logic.Tablero.*;
 
@@ -14,8 +15,8 @@ public class Prueba {
 
 //        System.out.println("TABLERO JUGADOR \t\t\t DISPAROS JUGADOR");
 //        verTablero(tableroJugador,tableroDisparosJugador);
-//        Jugador.pedirCoordenadas();
-//        System.out.println(Jugador.pedirOrientacion());
+//        logic.Jugador.pedirCoordenadas();
+//        System.out.println(logic.Jugador.pedirOrientacion());
 //        boolean hayColision2 = hayColision(tableroJugador, 4,8,4,1,true);
 //        if (!hayColision2)
 //            colocarEnElTablero(tableroJugador,4,8,4,1);

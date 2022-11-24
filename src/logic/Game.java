@@ -1,5 +1,8 @@
+package logic;
+
 import tools.Input;
 import static logic.Tablero.*;
+import static logic.Tutorial.*;
 
 public class Game {
 
@@ -12,12 +15,12 @@ public class Game {
         int vidasPc=contarCeldas(barcos), vidasJugador = contarCeldas(barcos);
         verTableroJugador(tableroJugador, tableroDisparosJugador);
         verTableroPc(tableroPc, tableroDisparosPc);
-//        Jugador.colocarBarcos(tableroJugador, tableroDisparosJugador, barcos);
+        Jugador.colocarBarcos(tableroJugador, tableroDisparosJugador, barcos);
         Pc.colocarBarcos(tableroPc,barcos, tableroDisparosPc);
 //        verTableroPc(tableroPc,tableroDisparosPc);
 //        do {
-//            boolean descuentaVidaPc = Jugador.disparos(tableroDisparosJugador,tableroPc,tableroJugador,tableroDisparosPc),
-//                    descuentaVidaJugador = Pc.disparos(tableroDisparosPc,tableroJugador,tableroDisparosJugador,tableroPc);
+//            boolean descuentaVidaPc = logic.Jugador.disparos(tableroDisparosJugador,tableroPc,tableroJugador,tableroDisparosPc),
+//                    descuentaVidaJugador = logic.Pc.disparos(tableroDisparosPc,tableroJugador,tableroDisparosJugador,tableroPc);
 //            if (descuentaVidaPc && vidasJugador>0) {
 //                vidasPc--;
 //                System.out.println(ANSI_PURPLE+"Vidas PC: "+vidasPc+ ANSI_RESET);
@@ -38,7 +41,7 @@ public class Game {
             opcion = Input.getInt("1.Read the instructions.\n2.Play in easy mode.\n3.Play against AI");
             switch (opcion){
                 case 1:
-                    System.out.println();
+                    tutorial();
                     break;
                 case 2:
                     jugabilidad();
