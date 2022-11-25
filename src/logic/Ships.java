@@ -130,11 +130,14 @@ public class Ships {
                         if (player)
                             System.err.println("The cell is occupied.");
                         return true;
+                    } else if ((col + i > 10) || (row + i > 10))
+                        System.err.println("Te sales del tablero");
+                    else {
+                        if (!alrededorHorizontalVacio(board, row, col, player, i))
+                            return true;
+                        if (!alrededorVerticalVacio(board, row, col, player, i))
+                            return true;
                     }
-                    if (!alrededorHorizontalVacio(board, row, col, player, i))
-                        return true;
-                    if (!alrededorVerticalVacio(board, row, col, player, i))
-                        return true;
                 } else {
                     if (player)
                         System.err.println("The ship does not fit to the right.");

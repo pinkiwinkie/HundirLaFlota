@@ -47,14 +47,9 @@ public class Game {
 //            option = Input.getInt("1.Read the instructions.\n2.Play in easy mode.\n3.Play against AI.\n4.Exit.");
             option = Input.getInt("1.Play in easy mode.\n2.Exit.");
             switch (option){
-                case 4:
-//                    tutorial();
-                    break;
+
                 case 1:
                     gameplay();
-                    break;
-                case 3:
-//                    jugabilidadConIa();
                     break;
                 case 2:
                     System.out.println("Bye.");
