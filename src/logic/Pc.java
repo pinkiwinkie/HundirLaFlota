@@ -16,7 +16,7 @@ public class Pc {
                 //se puede hacer entre 0 y 10 porque realmente lo que indica las letras son las filas que hay y
                 //eso es una posicion por ende son numeros.
                 int orientacion = getNumberRandom(2 - 1 + 1);
-                System.out.println(fila+" " + columna+" " + orientacion);
+//                System.out.println(fila+" " + columna+" " + orientacion);
                 if (orientacion == 1) {
                     if (!hayColision(tableroPC, barco, fila, columna, 1, false)) {
                         colocarEnElTablero(tableroPC, barco, fila, columna, 1);
@@ -33,7 +33,7 @@ public class Pc {
                         colocado = false;
                 } else
                     colocado = false;
-                Tablero.verTableroPc(tableroPC,tableroDisparosPC);
+//                Tablero.verTableroPc(tableroPC,tableroDisparosPC);
             } while (!colocado);
         } while (i != barcos.length);
     }
@@ -79,9 +79,15 @@ public class Pc {
 //            System.out.println("columna " + columna + "fila " + fila);
             salir = false;
             do {
-                if (disparosPC[fila][columna] == 'T' || disparosPC[fila][columna] == 'X') {
+                if (disparosPC[fila][columna] == 'X') {
                     salir=true;
-                } else {
+                }else if(disparosPC[fila][columna] == 'T') {
+                    if (tableroJugador[fila][columna+1] == 'B'){
+                        tableroJugador[fila][columna] = 'T';
+                        disparosPC[fila][columna] = 'T';
+                        descuentaVidaJugador = true;
+                    }
+                }else {
                     if (tableroJugador[fila][columna] == 'B') {
                         tableroJugador[fila][columna] = 'T';
                         disparosPC[fila][columna] = 'T';

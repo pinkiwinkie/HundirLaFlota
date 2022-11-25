@@ -1,16 +1,20 @@
 import logic.Jugador;
+import logic.Pc;
 
+import static logic.Barcos.colocarEnElTablero;
 import static logic.Tablero.crearTablero;
 import static logic.Tablero.*;
 
 public class Prueba {
     public static void main(String[] args) {
         char [][] tableroJugador = crearTablero(),
-                tableroDisparosJugador = crearTablero();
+                tableroDisparosJugador = crearTablero(), tableroPc = crearTablero(),
+                tableroDisparosPc = crearTablero();
         int [] barcos = {4,3,2,1,1};
         System.out.println("TABLERO JUGADOR \t\t\t DISPAROS JUGADOR");
+        int vidasPc=contarCeldas(barcos), vidasJugador = contarCeldas(barcos);
         verTableroJugador(tableroJugador, tableroDisparosJugador);
-        Jugador.colocarBarcos(tableroJugador, tableroDisparosJugador, barcos);
+//        Jugador.colocarBarcos(tableroJugador, tableroDisparosJugador, barcos);
 
 
 //        System.out.println("TABLERO JUGADOR \t\t\t DISPAROS JUGADOR");
@@ -19,10 +23,22 @@ public class Prueba {
 //        System.out.println(logic.Jugador.pedirOrientacion());
 //        boolean hayColision2 = hayColision(tableroJugador, 4,8,4,1,true);
 //        if (!hayColision2)
-//            colocarEnElTablero(tableroJugador,4,8,4,1);
+
 //        verTablero(tableroJugador,tableroDisparosJugador);
 //        System.out.println(colisionHorizontal(tableroJugador,5,2,3,true,false));
 //        System.out.println(colisionVertical(tableroJugador,5,2,3,true,false));
+        Pc.colocarBarcos(tableroJugador,barcos,tableroDisparosJugador);
+       verTableroJugador(tableroJugador,tableroDisparosJugador);
+        Pc.colocarBarcos(tableroPc, barcos, tableroDisparosPc);
+        verTableroPc(tableroPc,tableroDisparosPc);
+        Pc.disparosConIa(tableroDisparosPc,tableroJugador,tableroDisparosJugador,tableroPc);
+        do {
+            boolean descuentaVidaJugador = logic.Pc.disparos(tableroDisparosPc,tableroJugador,tableroDisparosJugador,tableroPc);
+            if (descuentaVidaJugador && vidasPc>0) {
+                vidasJugador--;
+                System.out.println(ANSI_GREEN+"Vidas jugador: "+vidasJugador+ ANSI_RESET);
+            }
+        }while (vidasJugador>0);
     }
 }
 

@@ -129,6 +129,9 @@ public class Barcos {
         } else if (columna == 9) {
             if (!esFilaSiguienteLibre(tablero, fila, columna, jugador, i))
                 return false;
+        } else if (fila == 1) {
+            if (!esFilaSiguienteLibre(tablero, fila, columna, jugador, i))
+                return false;
         } else {
             //busca coincidencias en el interior del mapa.
             if (!esColumnaAnteriorLibreOColumnaSiguienteLibre(tablero, fila, columna, jugador, i))
@@ -155,10 +158,10 @@ public class Barcos {
             if (!esColumnaSiguienteLibre(tablero, fila, columna, jugador, i))
                 return false;
         } else if (fila == 9) {
-            if (!esFilaAnteriorLibre(tablero,fila,columna,jugador,i))
+            if (!esFilaAnteriorLibre(tablero, fila, columna, jugador, i))
                 return false;
 //busca coincidencias en el interior del mapa
-        }else {
+        } else {
             if (!esFilaAnteriorLibreOFilaSiguienteLibre(tablero, fila, columna, jugador, i))
                 return false;
         }
@@ -168,7 +171,7 @@ public class Barcos {
     //he quitado el fila + i de la primera parte del if.***
     private static boolean esColumnaAnteriorLibreOColumnaSiguienteLibre(char[][] tablero, int fila, int columna, boolean jugador, int i) {
         if (fila + i < 10) {
-            if ((tablero[fila][columna - 1] == 'B') || (tablero[fila + i][columna + 1] == 'B')) {
+            if ((tablero[fila + i][columna - 1] == 'B') || (tablero[fila + i][columna + 1] == 'B')) {
                 if (jugador)
                     System.err.println("You can not put a ship attached to another.");
                 return false;
@@ -178,8 +181,8 @@ public class Barcos {
     }
 
     private static boolean esColumnaSiguienteLibre(char[][] tablero, int fila, int columna, boolean jugador, int i) {
-        if (fila + i < 10) {
-            if (tablero[fila + i][columna + 1] == 'B') {
+        if (columna + (i + 1) < 10) {
+            if (tablero[fila][columna + i] == 'B') {
                 if (jugador)
                     System.err.println("You can not put a ship attached to another.");
                 return false;
@@ -189,15 +192,16 @@ public class Barcos {
     }
 
     private static boolean esColumnaAnteriorLibre(char[][] tablero, int fila, int columna, boolean jugador, int i) {
+
         if (tablero[fila][columna - 1] == 'B') {
             if (jugador)
                 System.err.println("You can not put a ship attached to another.");
             return false;
         }
+
         return true;
     }
 
-    // esta cambiado los nombres de los metodos del else y a la hora de llamarlo tambien está al revés.
     private static boolean esFilaAnteriorLibreOFilaSiguienteLibre(char[][] tablero, int fila, int columna, boolean jugador, int i) {
         if (columna + i < 10) {
             if ((tablero[fila - 1][columna + i] == 'B') || (tablero[fila + 1][columna + i] == 'B')) {
@@ -210,15 +214,6 @@ public class Barcos {
         return true;
     }
 
-    /**
-     *
-     * @param tablero
-     * @param fila
-     * @param columna
-     * @param jugador
-     * @param i
-     * @return
-     */
     private static boolean esFilaAnteriorLibre(char[][] tablero, int fila, int columna, boolean jugador, int i) {
         if (columna + i < 10) {
             if (tablero[fila - 1][columna + i] == 'B') {
@@ -232,7 +227,7 @@ public class Barcos {
     }
 
     private static boolean esFilaSiguienteLibre(char[][] tablero, int fila, int columna, boolean jugador, int i) {
-        if (columna + i < 10) {
+        if ((columna + i) < 10) {
             if ((tablero[fila + 1][columna + i] == 'B')) {
                 if (jugador)
                     System.err.println("No puedes poner un barco pegado de otro.");
