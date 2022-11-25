@@ -1,19 +1,17 @@
-import logic.Jugador;
 import logic.Pc;
 
-import static logic.Barcos.colocarEnElTablero;
-import static logic.Tablero.crearTablero;
-import static logic.Tablero.*;
+import static logic.Board.createBoard;
+import static logic.Board.*;
 
 public class Prueba {
     public static void main(String[] args) {
-        char [][] tableroJugador = crearTablero(),
-                tableroDisparosJugador = crearTablero(), tableroPc = crearTablero(),
-                tableroDisparosPc = crearTablero();
-        int [] barcos = {4,3,2,1,1};
+        char [][] tableroJugador = createBoard(),
+                tableroDisparosJugador = createBoard(), tableroPc = createBoard(),
+                tableroDisparosPc = createBoard();
+        int [] barcos = {6,5,4,3,2,1};
         System.out.println("TABLERO JUGADOR \t\t\t DISPAROS JUGADOR");
-        int vidasPc=contarCeldas(barcos), vidasJugador = contarCeldas(barcos);
-        verTableroJugador(tableroJugador, tableroDisparosJugador);
+        int vidasPc= countCells(barcos), vidasJugador = countCells(barcos);
+        showPlayerBoard(tableroJugador, tableroDisparosJugador);
 //        Jugador.colocarBarcos(tableroJugador, tableroDisparosJugador, barcos);
 
 
@@ -27,18 +25,18 @@ public class Prueba {
 //        verTablero(tableroJugador,tableroDisparosJugador);
 //        System.out.println(colisionHorizontal(tableroJugador,5,2,3,true,false));
 //        System.out.println(colisionVertical(tableroJugador,5,2,3,true,false));
-        Pc.colocarBarcos(tableroJugador,barcos,tableroDisparosJugador);
-       verTableroJugador(tableroJugador,tableroDisparosJugador);
-        Pc.colocarBarcos(tableroPc, barcos, tableroDisparosPc);
-        verTableroPc(tableroPc,tableroDisparosPc);
-        Pc.disparosConIa(tableroDisparosPc,tableroJugador,tableroDisparosJugador,tableroPc);
-        do {
-            boolean descuentaVidaJugador = logic.Pc.disparos(tableroDisparosPc,tableroJugador,tableroDisparosJugador,tableroPc);
-            if (descuentaVidaJugador && vidasPc>0) {
-                vidasJugador--;
-                System.out.println(ANSI_GREEN+"Vidas jugador: "+vidasJugador+ ANSI_RESET);
-            }
-        }while (vidasJugador>0);
+        Pc.putShips(tableroJugador,barcos);
+       showPlayerBoard(tableroJugador,tableroDisparosJugador);
+        Pc.putShips(tableroPc, barcos);
+        showPcBoard(tableroPc,tableroDisparosPc);
+//        Pc.disparosConIa(tableroDisparosPc,tableroJugador,tableroDisparosJugador,tableroPc);
+//        do {
+//            boolean descuentaVidaJugador = logic.Pc.disparos(tableroDisparosPc,tableroJugador,tableroDisparosJugador,tableroPc);
+//            if (descuentaVidaJugador && vidasPc>0) {
+//                vidasJugador--;
+//                System.out.println(ANSI_GREEN+"Vidas jugador: "+vidasJugador+ ANSI_RESET);
+//            }
+//        }while (vidasJugador>0);
     }
 }
 

@@ -1,108 +1,114 @@
 package logic;
 
-import static logic.Barcos.*;
-import static logic.Tablero.*;
+import static logic.Ships.*;
+import static logic.Board.*;
 
+/**
+ *
+ */
 public class Pc {
-    public static void colocarBarcos(char[][] tableroPC, int[] barcos, char[][] tableroDisparosPC) {
-        int barco, i=0;
-        boolean colocado;
+    /**
+     * @param PcBoard board to put the boats.
+     * @param ships   array with the boats to be placed.
+     */
+    public static void putShips(char[][] PcBoard, int[] ships) {
+        int ship, i = 0;
+        boolean putIt;
 
-        do{
+        do {
             do {
-                barco = barcos[i];
-                int columna = getNumberRandom(9);
-                int fila = getNumberRandom(9);
+                ship = ships[i];
+                int col = getRandomNumber(9);
+                int row = getRandomNumber(9);
                 //se puede hacer entre 0 y 10 porque realmente lo que indica las letras son las filas que hay y
                 //eso es una posicion por ende son numeros.
-                int orientacion = getNumberRandom(2 - 1 + 1);
-//                System.out.println(fila+" " + columna+" " + orientacion);
-                if (orientacion == 1) {
-                    if (!hayColision(tableroPC, barco, fila, columna, 1, false)) {
-                        colocarEnElTablero(tableroPC, barco, fila, columna, 1);
-                        colocado = true;
+                int orientation = getRandomNumber(2 - 1 + 1);
+//                System.out.println(row+" " + col+" " + orientation);
+                if (orientation == 1) {
+                    if (!thereIsACollision(PcBoard, ship, row, col, 1, false)) {
+                        putOnTheBoard(PcBoard, ship, row, col, 1);
+                        putIt = true;
                         i++;
                     } else
-                        colocado = false;
-                } else if (orientacion == 2) {
-                    if (!hayColision(tableroPC, barco, fila, columna, 2, false)) {
-                        colocarEnElTablero(tableroPC, barco, fila, columna, 2);
-                        colocado = true;
+                        putIt = false;
+                } else if (orientation == 2) {
+                    if (!thereIsACollision(PcBoard, ship, row, col, 2, false)) {
+                        putOnTheBoard(PcBoard, ship, row, col, 2);
+                        putIt = true;
                         i++;
                     } else
-                        colocado = false;
+                        putIt = false;
                 } else
-                    colocado = false;
-//                Tablero.verTableroPc(tableroPC,tableroDisparosPC);
-            } while (!colocado);
-        } while (i != barcos.length);
+                    putIt = false;
+//                Tablero.verTableroPc(PcBoard,tableroDisparosPC);
+            } while (!putIt);
+        } while (i != ships.length);
     }
 
-    public static boolean disparos(char[][] disparosPC, char[][] tableroJugador, char[][] disparosJugador, char[][] tableroPC) {
-        boolean hayDisparo = false, salir, descuentaVidaJugador = false;
+    /**
+     * @param pcShootsBoard     to see the shots he has made.
+     * @param playerBoard       board where the pc shoots.
+     * @param playerShootsBoard to show it at the end of the whole.
+     * @param pcBoard           to show it at the end of the whole.
+     * @return true if discount user lives
+     */
+    public static boolean shoots(char[][] pcShootsBoard, char[][] playerBoard, char[][] playerShootsBoard, char[][] pcBoard) {
+        boolean isShoot = false, exit, discountUserLives = false;
         do {
-            int columna = getNumberRandom(9);
-            int fila = getNumberRandom(9);
-//            System.out.println("columna " + columna + "fila " + fila);
-            salir = false;
+            int col = getRandomNumber(9);
+            int row = getRandomNumber(9);
+//            System.out.println("col " + col + "row " + row);
+            exit = false;
             do {
-                if (disparosPC[fila][columna] == 'T' || disparosPC[fila][columna] == 'X') {
-                    salir=true;
+                if (pcShootsBoard[row][col] == 'T' || pcShootsBoard[row][col] == 'X') {
+                    exit = true;
                 } else {
-                    if (tableroJugador[fila][columna] == 'B') {
-                        tableroJugador[fila][columna] = 'T';
-                        disparosPC[fila][columna] = 'T';
-                        descuentaVidaJugador = true;
+                    if (playerBoard[row][col] == 'B') {
+                        playerBoard[row][col] = 'T';
+                        pcShootsBoard[row][col] = 'T';
+                        discountUserLives = true;
 
                     } else {
-                        disparosPC[fila][columna] = 'X';
-                        tableroJugador[fila][columna] = 'X';
+                        pcShootsBoard[row][col] = 'X';
+                        playerBoard[row][col] = 'X';
                     }
-                    hayDisparo = true;
+                    isShoot = true;
                 }
-            } while (!salir);
-        } while (!hayDisparo);
-        verTableroJugador(tableroJugador, disparosJugador);
-        verTableroPc(tableroPC, disparosPC);
-        return descuentaVidaJugador;
+            } while (!exit);
+        } while (!isShoot);
+        showPlayerBoard(playerBoard, playerShootsBoard);
+        showPcBoard(pcBoard, pcShootsBoard);
+        return discountUserLives;
     }
 
-    private static int getNumberRandom(int x) {
+    /**
+     * (Math.random() * (max - min + 1) + min
+     *
+     * @param x = (max - min + 1) -->  Mark the lower and upper range
+     * @return a random number inside the range.
+     */
+    private static int getRandomNumber(int x) {
         return (int) (Math.random() * x + 1);
     }
 
-    public static boolean disparosConIa(char[][] disparosPC, char[][] tableroJugador, char[][] disparosJugador, char[][] tableroPC) {
-        boolean hayDisparo = false, salir, descuentaVidaJugador = false;
-        do {
-            int columna = getNumberRandom(9);
-            int fila = getNumberRandom(9);
-//            System.out.println("columna " + columna + "fila " + fila);
-            salir = false;
-            do {
-                if (disparosPC[fila][columna] == 'X') {
-                    salir=true;
-                }else if(disparosPC[fila][columna] == 'T') {
-                    if (tableroJugador[fila][columna+1] == 'B'){
-                        tableroJugador[fila][columna] = 'T';
-                        disparosPC[fila][columna] = 'T';
-                        descuentaVidaJugador = true;
-                    }
-                }else {
-                    if (tableroJugador[fila][columna] == 'B') {
-                        tableroJugador[fila][columna] = 'T';
-                        disparosPC[fila][columna] = 'T';
-                        descuentaVidaJugador = true;
-
-                    } else {
-                        disparosPC[fila][columna] = 'X';
-                        tableroJugador[fila][columna] = 'X';
-                    }
-                    hayDisparo = true;
-                }
-            } while (!salir);
-        } while (!hayDisparo);
-        verTableroJugador(tableroJugador, disparosJugador);
-        verTableroPc(tableroPC, disparosPC);
-        return descuentaVidaJugador;
-    }
+//    public static boolean disparosConIa(char[][] disparosPC, char[][] tableroJugador, char[][] disparosJugador, char[][] tableroPC) {
+//        boolean hayDisparo = false, salir, descuentaVidaJugador = false;
+//        int columna, fila;
+////            System.out.println("columna " + columna + "fila " + fila);
+//        columna = getNumberRandom(9);
+//        fila = getNumberRandom(9);
+//        do {
+//            salir = false;
+//            do {
+//                if (disparosPC[fila][columna] == 'X')
+//                    salir = true;
+//                if (disparosPC[fila][columna] == 'T')
+//                    if (disparosPC[fila][columna+1] == 'B')
+//            } while (!salir);
+//
+//        } while (!hayDisparo);
+//        verTableroJugador(tableroJugador, disparosJugador);
+//        verTableroPc(tableroPC, disparosPC);
+//        return descuentaVidaJugador;
+//    }
 }
